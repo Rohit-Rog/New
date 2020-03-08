@@ -1,4 +1,4 @@
-package test.pipeline
+package test.pipeline;
 
 class Person{
 	int age
