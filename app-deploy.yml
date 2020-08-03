@@ -1,0 +1,29 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: app-deploy
+ namespace: myns
+ labels:
+  server: nginx
+  action: test
+spec:
+ selector:
+  matchLabels:
+   server: nginx
+ replicas: 3
+ strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxUnavailable: 1
+ template:
+  metadata:
+    labels:
+      server: nginx
+  spec:
+    containers:
+     - name: app-con
+       image: nginx
+       ports:
+        - containerPort: 80
+       command: ["sh"]
+       args: ["-c","while [ true ]; do echo hello from the inside ; sleep 1; done"]
