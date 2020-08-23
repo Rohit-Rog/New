@@ -1,0 +1,27 @@
+﻿apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx-pod
+ labels:
+   server: nginx
+spec:
+  volumes:
+     name: my-volume
+     persistentVolumeClaim:
+       claimName: my-pvc
+  containers:
+    - name: nginx-cont
+      image: nginx
+      env:
+       - name: Name
+         value: "nginx"
+       - name: num
+         value: "1"
+      command: [ "sh" ]
+      args: ["-c","while [ true ]; do echo \" I am $(Name), $(num) time(s)\"; num= 'expr $(num) + 1'; done"]
+      ports:
+       - containerPort: 80
+      volumeMount:
+        mountPath: /nginx
+        name: my-volume
+  restartPolicy: OnFailure
