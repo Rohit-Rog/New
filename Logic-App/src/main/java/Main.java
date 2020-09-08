@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Stack<Item> {
     private Node top;
     private int N;
@@ -39,7 +41,8 @@ class Stack<Item> {
 }
 public class Main {
     public static void main(String[] args){
-        System.out.println(checkStack(args[0]));
+        Scanner sc= new Scanner(System.in);
+        System.out.println(checkStack(sc.next()));
         //System.out.println(args[0]);
     }
     public static boolean checkStack(String input){
@@ -61,8 +64,6 @@ public class Main {
 			}
         }
         stack1.iterator();
-        if(stack1.isEmpty())
-            return true;
-        return false;
+        return stack1.isEmpty();
     }
 }
